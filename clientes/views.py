@@ -1,13 +1,19 @@
 #Django
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+
+#Django Generic Views
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 #Models
 from .models import Person
 
 #Forms
 from .forms import PersonForm
+
+# Utils
+from django.utils import timezone
 
 
 @login_required
@@ -51,5 +57,10 @@ def persons_delete(request, id):
 class PersonList(ListView):
     model = Person
 
-    
+class PersonDetailView(DetailView)    :
+    model = Person
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
