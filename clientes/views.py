@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 
 #Models
 from .models import Person
@@ -15,6 +17,7 @@ from .forms import PersonForm
 
 # Utils
 from django.utils import timezone
+from django.urls import reverse_lazy
 
 
 @login_required
@@ -74,4 +77,13 @@ class PersonCreateView(CreateView):
     fields = '__all__'
     success_url = '/clientes/person_list/'
 
+class PersonUpdateView(UpdateView):
+    model = Person
+    fields = '__all__'
+    success_url = reverse_lazy('person_list_cbv')
+
+class PersonDeleteView(DeleteView):
+    model = Person
+    success_url = reverse_lazy('person_list_cbv')
+    
 
