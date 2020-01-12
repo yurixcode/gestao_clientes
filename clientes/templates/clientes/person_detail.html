@@ -1,4 +1,9 @@
 <h1>Person detail:</h1>
+
+{% if object.photo %}
+    <img src="{{ object.photo.url }}" alt="img" width="100px"> <br>
+{% endif %}
+
 {{ object.first_name }} <br>
 {{ object.last_name }} <br>
 {{ object.age }} <br>

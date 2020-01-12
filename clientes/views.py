@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 #Django Generic Views
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 
 #Models
 from .models import Person
@@ -54,13 +55,23 @@ def persons_delete(request, id):
 
     return render(request, 'person_delete_confirm.html', {'person': person})
 
+
 class PersonList(ListView):
     model = Person
 
-class PersonDetailView(DetailView)    :
+
+class PersonDetailView(DetailView):
     model = Person
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+        
+
+class PersonCreateView(CreateView):
+    model = Person
+    fields = '__all__'
+    success_url = '/clientes/person_list/'
+
+
