@@ -6,7 +6,7 @@ from django.views import View
 
 # TODO: Hacer seguimiento de solicitudes
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home/home.html')
 
 def my_logout(request):
     logout(request)

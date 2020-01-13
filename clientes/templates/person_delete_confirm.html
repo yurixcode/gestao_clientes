@@ -12,7 +12,9 @@
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
+{% endblock %}
 
-
+{% block footer %}
+    {% include 'footer.html' with footer_message="footer por defecto definido mediante 'with' " %}
 {% endblock %}
 

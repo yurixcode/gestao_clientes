@@ -23,7 +23,8 @@ from django.urls import reverse_lazy
 @login_required
 def persons_list(request):
     persons = Person.objects.all()
-    return render(request, 'person.html', {'persons': persons})
+    footer_message = 'Desenvolvido con Django by yurixcode'
+    return render(request, 'person.html', {'persons': persons, 'footer_message': footer_message})
 
 
 @login_required
@@ -51,6 +52,7 @@ def persons_update(request, id):
 @login_required
 def persons_delete(request, id):
     person = get_object_or_404(Person, pk=id)
+
 
     if request.method == 'POST':
         person.delete()
