@@ -1,6 +1,20 @@
+{% load my_tags %}
+
 <footer class="footer">
     <div class="container">
-      <span class="text-muted">{{ footer_message }}</span>
+      <div class="row">
+
+        <div class="col-8">
+          <span class="text-muted">{% footer_message %}</span>
+        </div>
+  
+        <div class="col-4 text-muted">
+          {% current_time '%d-%m-%Y  %H:%M:%S'%}
+        </div>
+
+      </div>
+      
+
     </div>
   </footer>
   
