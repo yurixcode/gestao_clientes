@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load filters %}
-
+{% load my_tags %}
 
 {% block title %} Administracao {% endblock %}
 
@@ -43,8 +43,11 @@
             {% endif %}
         </div>
     </div>
-
+<br>
 {{ footer_message|my_filter }}
+<br>
+<h3>Hora do servidor: </h3>
+{% current_time '%d-%m-%Y | %H:%M:%S'%}
 
 
 {% endblock %}
