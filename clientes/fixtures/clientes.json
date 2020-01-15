@@ -1,0 +1,54 @@
+[
+{
+    "model": "clientes.person",
+    "pk": 1,
+    "fields": {
+        "first_name": "Yuri",
+        "last_name": "Marques",
+        "age": 17,
+        "salary": "100.00",
+        "bio": "funka",
+        "photo": "",
+        "doc": null
+    }
+},
+{
+    "model": "clientes.person",
+    "pk": 2,
+    "fields": {
+        "first_name": "Yan",
+        "last_name": "Arthur",
+        "age": 14,
+        "salary": "120.00",
+        "bio": "Irm\u00e3o",
+        "photo": "",
+        "doc": null
+    }
+},
+{
+    "model": "clientes.person",
+    "pk": 3,
+    "fields": {
+        "first_name": "Yan",
+        "last_name": "Arthur2",
+        "age": 14,
+        "salary": "120.00",
+        "bio": "Irm\u00e3o",
+        "photo": "",
+        "doc": null
+    }
+},
+{
+    "model": "clientes.person",
+    "pk": 7,
+    "fields": {
+        "first_name": "paco",
+        "last_name": "Marques",
+        "age": 5,
+        "salary": "12.00",
+        "bio": "papapap",
+        "photo": "clients_photos/gravatar_a7agKzD.png",
+        "doc": null
+    }
+}
+]
