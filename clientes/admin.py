@@ -21,6 +21,8 @@ class PersonAdmin(admin.ModelAdmin):
     list_filter = ('age', 'salary')
     list_display = ('first_name', 'doc', 'last_name', 'age', 'salary', 'bio', 'has_photo')
 
+    search_fields = ('id', 'first_name')
+
     def has_photo(self, obj):
         if obj.photo:
             return 'Si'
@@ -35,16 +37,20 @@ class PersonAdmin(admin.ModelAdmin):
 class VendaAdmin(admin.ModelAdmin):
     list_filter = ('pessoa__doc',)
     list_display = ('numero', 'pessoa', 'get_total', 'nfe_emitida')
-    raw_id_fields = ('pessoa',)
+    # raw_id_fields = ('pessoa',)
+    autocomplete_fields = ('pessoa', 'produtos')
 
     readonly_fields = ('valor',)
     search_fields = ('numero', 'pessoa__first_name', 'pessoa__last_name', 'pessoa__doc__num_doc')
 
     actions = [nfe_emitida, nfe_nao_emitida]
+    # filter_horizontal = ['produtos']
 
 
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = ('id', 'descricao', 'preco')
+    search_fields = ('id', 'descricao')
+
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Documento)
