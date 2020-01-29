@@ -17,7 +17,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-from django.urls import include, path  # For django versions from 2.0 and up
 
 if settings.DEBUG:
     import debug_toolbar
@@ -25,3 +24,7 @@ if settings.DEBUG:
         path('__debug__/', include(debug_toolbar.urls)),
         
     ] + urlpatterns
+
+admin.site.site_header = "Gestao de Clientes"
+admin.site.index_title = "Administraçao"
+admin.site.site_title = "Seja bem vindo ao Gestao de Clientes" #Etiqueta tittle
