@@ -15,10 +15,33 @@ class PersonAdmin(admin.ModelAdmin):
     )
 
     """En list_display señalamos los campos que queremos mostrar previo a acceder los datos"""
-    list_display = ('first_name', 'doc', 'last_name', 'age', 'salary', 'bio', 'photo')
+    list_filter = ('age', 'salary')
+    list_display = ('first_name', 'doc', 'last_name', 'age', 'salary', 'bio', 'has_photo')
 
+    def has_photo(self, obj):
+        if obj.photo:
+            return 'Si'
+        else:
+            return ''
+
+    has_photo.short_description = 'Tiene FOTO'
+
+
+
+
+class VendaAdmin(admin.ModelAdmin):
+    list_filter = ('pessoa__doc',)
+    list_display = ('numero', 'pessoa', 'get_total')
+    raw_id_fields = ('pessoa',)
+
+    readonly_fields = ('valor',)
+    search_fields = ('numero', 'pessoa__first_name', 'pessoa__last_name', 'pessoa__doc__num_doc')
+
+
+class ProdutoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'descricao', 'preco')
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Documento)
-admin.site.register(Venda)
-admin.site.register(Produto)
+admin.site.register(Venda, VendaAdmin)
+admin.site.register(Produto, ProdutoAdmin)
