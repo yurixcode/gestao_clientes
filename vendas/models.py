@@ -32,7 +32,7 @@ class Venda(models.Model):
     #     return self.valor
 
 
-class ItemsDoPedido(models.Model):
+class ItemDoPedido(models.Model):
     venda = models.ForeignKey(Venda, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
 

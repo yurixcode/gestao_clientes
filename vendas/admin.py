@@ -2,10 +2,14 @@ from django.contrib import admin
 
 # Models
 from .models import Venda
-from .models import ItemsDoPedido
+from .models import ItemDoPedido
 
 # Actions
 from .actions import nfe_emitida, nfe_nao_emitida
+
+class ItemPedidoInline(admin.TabularInline):
+    model = ItemDoPedido
+    extra = 2
 
 
 class VendaAdmin(admin.ModelAdmin):
@@ -20,7 +24,9 @@ class VendaAdmin(admin.ModelAdmin):
 
     actions = [nfe_emitida, nfe_nao_emitida]
     # filter_horizontal = ['produtos']
+    
+    inlines = [ItemPedidoInline]
 
 
 admin.site.register(Venda, VendaAdmin)
-admin.site.register(ItemsDoPedido)
+admin.site.register(ItemDoPedido)
