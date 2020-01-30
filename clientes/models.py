@@ -27,6 +27,7 @@ class Person(models.Model):
     def __str__(self):
         return self.full_name.capitalize()
 
+
 class Produto(models.Model):
     descricao = models.CharField(max_length=100)
     preco = models.DecimalField(max_digits=5, decimal_places=2)
@@ -41,23 +42,33 @@ class Venda(models.Model):
     desconto = models.DecimalField(max_digits=5, decimal_places=2)
     impostos = models.DecimalField(max_digits=5, decimal_places=2)
     pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
-    produtos = models.ManyToManyField(Produto, blank=True)
     nfe_emitida = models.BooleanField()
     
     def __str__(self):
         return self.numero
 
-    def get_total(self):
-        total = 0
-        for produto in self.produtos.all():
-            total += produto.preco
+    # def get_total(self):
+    #     total = 0
+    #     for produto in self.produtos.all():
+    #         total += produto.preco
 
-        self.valor = (total - self.desconto) + self.impostos
-        self.save()
+    #     self.valor = (total - self.desconto) + self.impostos
+    #     self.save()
 
-        return self.valor
+    #     return self.valor
 
-@receiver(m2m_changed, sender=Venda.produtos.through)
+class ItemsDoPedido(models.Model):
+    venda = models.ForeignKey(Venda, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+
+    quantidade = models.FloatField()
+    desconto = models.DecimalField(max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.venda} - {self.produto}({self.quantidade})'
+
+
+# @receiver(m2m_changed, sender=Venda.produtos.through)
 def update_totals(sender, instance, *args, **kwargs):
     instance.get_total()
 
