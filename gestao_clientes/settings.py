@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'bootstrapform',
     'clientes',
     'home',
+    'produtos',
+    'vendas',
     'debug_toolbar',
 ]
 

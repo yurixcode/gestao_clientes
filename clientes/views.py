@@ -13,7 +13,7 @@ from django.views.generic.edit import DeleteView
 
 #Models
 from .models import Person
-from .models import Produto
+from produtos.models import Produto
 
 #Forms
 from .forms import PersonForm
