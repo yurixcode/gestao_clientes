@@ -10,6 +10,9 @@ from django.dispatch import receiver
 from clientes.models import Person
 from produtos.models import Produto
 
+# Managers
+from .managers import VendaManager
+
 
 class Venda(models.Model):
     numero = models.CharField(max_length=7)
@@ -19,6 +22,16 @@ class Venda(models.Model):
     pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
     produto = models.ManyToManyField(Produto, through='ItemDoPedido')
     nfe_emitida = models.BooleanField()
+
+    objects = VendaManager()
+
+    class Meta:
+        permissions = (
+            ('setar_nfe', 'Usuario pode alterar parametro NF-e'),
+            ('permissao2', 'Permissao 2'),
+            ('permissao3', 'Permissao 3')
+        )
+
     
     def __str__(self):
         return self.numero
