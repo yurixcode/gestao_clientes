@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
+# Mixins
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
 #Django Generic Views
 from django.views.generic.list import View
 from django.views.generic.list import ListView
@@ -66,11 +69,11 @@ def persons_delete(request, id):
     return render(request, 'person_delete_confirm.html', {'person': person})
 
 
-class PersonList(ListView):
+class PersonList(LoginRequiredMixin, ListView):
     model = Person
 
 
-class PersonDetailView(DetailView):
+class PersonDetailView(LoginRequiredMixin, DetailView):
     model = Person
 
     def get_context_data(self, **kwargs):
@@ -84,17 +87,21 @@ class PersonCreateView(CreateView):
     fields = '__all__'
     success_url = '/clientes/person_list/'
 
+
 class PersonUpdateView(UpdateView):
     model = Person
     fields = '__all__'
     success_url = reverse_lazy('person_list_cbv')
 
-class PersonDeleteView(DeleteView):
+
+class PersonDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = ('clientes.deletar_clientes',)
     model = Person
     # success_url = reverse_lazy('person_list_cbv')
     
     def get_success_url(self):
         return reverse_lazy('person_list_cbv')
+
 
 class ProductoBulk(View):
     def get(self, request):
