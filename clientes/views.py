@@ -96,6 +96,7 @@ class PersonUpdateView(UpdateView):
 
 class PersonDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = ('clientes.deletar_clientes',)
+    raise_exception = True
     model = Person
     # success_url = reverse_lazy('person_list_cbv')
     

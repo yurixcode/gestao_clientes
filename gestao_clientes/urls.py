@@ -3,7 +3,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+
+# Django Views
 from django.contrib.auth import views as auth_views
+from django.contrib.auth import urls as django_urls
 
 # App's urls
 from home import urls as home_urls
@@ -21,6 +24,7 @@ urlpatterns = [
     path('vendas/', include(vendas_urls)),
     path('login/', auth_views.login, name='login'),
     path('admin/', admin.site.urls),
+    path('accounts/', include(django_urls))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
