@@ -170,6 +170,11 @@ STATIC_URL = '/static/'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+
+ADMINS = [
+    ('Yurix', 'yurimm4@gmail.com')
+]
+
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = 587 
 EMAIL_HOST_USER = 'yurimm4@gmail.com'
